@@ -156,6 +156,52 @@ public class Model implements ControllerToModel{
 		customRows = 9;
 		customCols = 9;
 	}
+
+	public int getNumMines(){
+		return numberMines;
+	}
+	
+	public boolean [][] getExposed(){
+		if(exposedTiles==null)
+			System.exit(NULL_EXIT_CODE);
+		return exposedTiles;
+	}
+	
+	public int[] getLastPressed(){
+		if(lastpressed==null)
+			System.exit(NULL_EXIT_CODE);
+		return lastpressed;
+	}
+	
+	// If user wants to change the number of extra lives
+	public void setExtraLives(int lives){
+		if(extraLivesLeft<=3 && extraLivesLeft>=-1)
+			extraLivesLeft = lives;
+	}
+	
+	public String getBestTimes(){
+		String str = "";
+		if(difficultyIndex == 0 || bestTimeSecondsBeg>0)
+			str += ("Beginner best time: "+ bestTimeSecondsBeg+ " seconds\n" );
+		if(difficultyIndex == 1 || bestTimeSecondsInter>0)
+			str += ("Intermediate best time: "+ bestTimeSecondsInter+ " seconds\n" );
+		if(difficultyIndex == 2 || bestTimeSecondsExpert>0)
+			str += ("Expert best time: "+ bestTimeSecondsExpert+ " seconds\n" );
+		if(difficultyIndex == 3 || bestTimeSecondsCustom>0)
+			str += ("Custom best time: "+ bestTimeSecondsCustom+ " seconds\n" );
+		
+		return str;
+	}
+	
+	public int getExtraLivesLeft(){
+		return extraLivesLeft;
+	}
+	
+	public String [][] getGrid(){
+		if(actualGrid==null)
+			System.exit(NULL_EXIT_CODE);
+		return actualGrid;
+	}
 	
 
 	
