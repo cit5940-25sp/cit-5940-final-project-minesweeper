@@ -29,7 +29,7 @@ public class Model implements ControllerToModel{
 	private int extraLivesLeft; // Starts with value -1
 	
 	// Decides if a numbered tile is pressed for the first time, 
-    	// or if it is pressed for autocompletion
+    // or if it is pressed for autocompletion
 	private int [][] timesNumberPressed;
 	// Tracks which tiles the user can see the values for
 	private boolean[][] exposedTiles;
@@ -49,7 +49,7 @@ public class Model implements ControllerToModel{
 	private int[] lastpressed;
 	private boolean won;
 	private boolean lost;
-
+	
 	// Random generator for the tile grid
 	private Random randgen;
 	
@@ -106,7 +106,7 @@ public class Model implements ControllerToModel{
 			throw new IllegalArgumentException("Difficulty not correct!");
 		}
 	}
-
+	
 	// If user wants to play a custom game, change rows
 	public void setCustomRows(int rows){
 		if(rows>=2 && rows<=30)
@@ -156,7 +156,7 @@ public class Model implements ControllerToModel{
 		customRows = 9;
 		customCols = 9;
 	}
-
+	
 	public int getNumMines(){
 		return numberMines;
 	}
@@ -202,7 +202,7 @@ public class Model implements ControllerToModel{
 			System.exit(NULL_EXIT_CODE);
 		return actualGrid;
 	}
-
+	
 	public boolean startGame(){
 		if(numberRows>=2 && numberRows<=30 && numberCols<=30 &&
 				numberCols>=2 && numberMines>=1 && numberMines<=150
@@ -283,7 +283,7 @@ public class Model implements ControllerToModel{
 			}
 		}
 	}
-
+	
 	// Given the tile coordinate, return the number of mines around it
 	private int getNumberOfMines(int row, int col){
 		if(row==0) 
@@ -372,6 +372,7 @@ public class Model implements ControllerToModel{
 	{
 		return gamesWon;
 	}
+	
 	// Returns true if tile at (row, col) is a mine that was previously hit
 	private boolean minePreviouslyHit(int row, int col)
 	{
@@ -541,7 +542,4 @@ public class Model implements ControllerToModel{
 		}
 		return true;
 	}
-	
-
-	
 }
