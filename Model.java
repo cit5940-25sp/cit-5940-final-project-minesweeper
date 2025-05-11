@@ -283,6 +283,95 @@ public class Model implements ControllerToModel{
 			}
 		}
 	}
+
+	// Given the tile coordinate, return the number of mines around it
+	private int getNumberOfMines(int row, int col){
+		if(row==0) 
+		{
+			if(col==0)
+				return isMine(0,1)+isMine(1,1)+isMine(1,0);
+			else if(col==numberCols-1) 
+				return isMine(0,numberCols-2)+isMine(1,numberCols-2)+isMine(1,numberCols-1);
+			else 
+				return isMine(0,col-1)+isMine(0,col+1)+isMine(1,col-1)+
+						isMine(1,col)+isMine(1,col+1);
+		}
+		else if(row==numberRows-1)
+		{
+			if(col==0)
+				return isMine(numberRows-2,0)+isMine(numberRows-2,1)+isMine(numberRows-1,1);
+			else if(col==numberCols-1)
+				return isMine(numberRows-2,numberCols-1)+isMine(numberRows-2,numberCols-2)+
+						isMine(numberRows-1,numberCols-2);
+			else
+				return isMine(numberRows-1,col-1)+isMine(numberRows-1,col+1)+
+						isMine(numberRows-2,col-1)+
+						isMine(numberRows-2,col)+isMine(numberRows-2,col+1);
+		}
+		else if(col==0) 
+			return isMine(row-1,col)+isMine(row+1,col)+isMine(row-1,col+1)+
+					isMine(row,col+1)+isMine(row+1,col+1);
+		else if(col == numberCols-1)
+			return isMine(row-1,numberCols-1)+isMine(row+1,numberCols-1)+
+					isMine(row-1,numberCols-2)+
+					isMine(row,numberCols-2)+isMine(row+1,numberCols-2);
+		else
+		{
+			return isMine(row-1,col-1)+isMine(row-1,col)+isMine(row-1,col+1)+
+					isMine(row,col-1)+isMine(row,col+1)+
+					isMine(row+1,col-1)+isMine(row+1,col)+isMine(row+1,col+1);
+		}
+	}
+	
+	// Returns 1 if tile at (row, col) is a mine, 0 otherwise
+	private int isMine(int row, int col)
+	{
+		if(actualGrid==null)
+			System.exit(NULL_EXIT_CODE);
+		if(actualGrid[row][col].equals(MINE))
+			return 1;
+		else
+			return 0;
+	}
+	
+	// If flagged == true, tile at (row, col) has been flagged; if false, unflagged
+	public void tileFlagged(boolean flagged,int row, int col)
+	{
+		if(flaggedTiles==null)
+			System.exit(NULL_EXIT_CODE);
+		flaggedTiles[row][col] = flagged;
+	}
+	
+	public ArrayList<String> getDifficulties()
+	{
+		if(DIFFICULTIES==null)
+			System.exit(NULL_EXIT_CODE);
+		return DIFFICULTIES;
+	}
+	
+	// Returns true if player lost, false otherwise
+	public boolean playerLost()
+	{
+		return lost;
+	}
+	
+	// Returns true if player won, false otherwise
+	// need playerLost and playerWon b/c the player could do either
+	// or neither (not both)
+	public boolean playerWon()
+	{
+		return won;
+	}
+	
+	public long getTotalGamesPlayed()
+	{
+		return gamesPlayed;
+	}
+	
+	public long getTotalGamesWon()
+	{
+		return gamesWon;
+	}
 	
 
 	
