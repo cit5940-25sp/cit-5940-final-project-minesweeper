@@ -107,6 +107,57 @@ public class Model implements ControllerToModel{
 		}
 	}
 
+	// If user wants to play a custom game, change rows
+	public void setCustomRows(int rows){
+		if(rows>=2 && rows<=30)
+			customRows = rows;
+	}
+	
+	// If user wants to play a custom game, change cols
+	public void setCustomColumns(int cols){
+		if(cols>=2 && cols<=30)
+			customCols = cols;
+	}
+	
+	// If user wants to play a custom game, change mines
+	public void setCustomMines(int mines){
+		if(mines>=1 && mines<=150)
+			customMines = mines;
+	}
+	
+	// Resets game data to play another game
+	public void resetGame(){
+		gamesPlayed += 1;
+
+		randgen = new Random(System.currentTimeMillis());
+		
+		// Reset difficulty level to default
+		numberMines = BEGINNERMINES;
+		numberRows = 9;
+		numberCols = 9;
+		difficultyIndex = 0;
+		
+		// Rest last tile pressed
+		lastpressed = new int[2];
+		lastpressed[0] = -1;
+		lastpressed[1] = -1;
+		
+		// Reset win/loss
+		won = false;
+		lost = false;
+		extraLivesLeft = -1;
+		minesHit = new int[3][2];
+		minesHit[0][0] = lastpressed[0];  minesHit[0][1] = lastpressed[1];
+		minesHit[1][0] = lastpressed[0];  minesHit[1][1] = lastpressed[1];
+		minesHit[2][0] = lastpressed[0];  minesHit[2][1] = lastpressed[1];
+	
+		// Reset custom settings
+		customMines = 10;
+		customRows = 9;
+		customCols = 9;
+	}
+	
+
 	
 	
 }
